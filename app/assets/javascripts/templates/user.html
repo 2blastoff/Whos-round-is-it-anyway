@@ -1,0 +1,34 @@
+<!-- <section id='access-options' ng-hide='userCtrl.isLoggedIn()'> -->
+<section id='access-options' ng-hide='userCtrl.loggedInStatus'>
+  <section id='choose-action' ng-show="userCtrl.noOptionChosen()">
+    <button id='choose-signup' ng-click="userCtrl.chooseSignUp = true;">Sign up</button>
+    <button id='choose-login' ng-click="userCtrl.chooseLogIn = true;">Log in</button>
+  </section>
+
+  <section id='user-registration' ng-show="userCtrl.chooseSignUp">
+    <form>
+      username:<br>
+      <input class="form-control" type="text" name='username' ng-model="userCtrl.userName" required><br>
+      email:<br>
+      <input class="form-control" type="email" name='email' ng-model="userCtrl.email" required><br>
+      password:<br>
+      <input class="form-control" type="password" name='password' ng-model="userCtrl.password" required>
+      <br>
+      password confirmation:<br>
+      <input class="form-control" type="password" name='password_confirmation' ng-model="userCtrl.passwordConfirmation" required>
+      <br>
+      <input class="form-control" id="signUp" type="submit" value="Submit" ng-click="userCtrl.signUp()">
+    </form>
+  </section>
+
+  <section id='user-login' ng-show="userCtrl.chooseLogIn">
+    <form>
+      email:<br>
+      <input class="form-control" type="email" name='email' ng-model="userCtrl.email" required><br>
+      password:<br>
+      <input class="form-control" type="password" name='password' ng-model="userCtrl.password" required>
+      <br>
+      <input class="form-control" id="logIn" type="submit" value="Submit" ng-click="userCtrl.logIn()">
+    </form>
+  </section>
+</section>

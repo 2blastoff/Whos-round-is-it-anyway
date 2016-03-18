@@ -1,0 +1,100 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
+ @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+body {
+  background-color: #fafafa;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+.col-md-4 {
+}
+
+.navbar {
+  background-color: rgb(36, 136, 218);
+  .navbar-brand {
+    color: rgb(245, 245, 245);
+  }
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+#beer {
+  font-size: 24px;
+}
+
+.log-container {
+  text-align: right;
+}
+
+#creating-group {
+  margin: 20px auto;
+  #add-group-name {
+    margin: 10px auto;
+  }
+  .users-in-group {
+    font-weight: bold;
+  }
+}
+#create-group {
+  margin: 10px auto;
+}
+
+.list-group-item {
+  a {
+    text-align: left;
+  }
+}
+
+
+#current-payer {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 20px;
+}
+
+#button-container {
+  text-align: center;
+  #update-payer {
+    font-size: 24px;
+  }
+}
+
+#payments {
+  #update-payer {
+    margin: 30px auto;
+  }
+  #who-is-payment {
+    margin: 30px auto;
+  }
+  #make-payment {
+    margin: 30px auto;
+  }
+}
+
+button {
+  @extend .btn;
+  @extend .btn-success;
+}
+
+#logout {
+  @extend .btn-danger;
+}

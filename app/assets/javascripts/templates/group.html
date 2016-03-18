@@ -1,0 +1,25 @@
+<section id='creating-group' ng-hide="groupCtrl.isGroupCreated()">
+
+  <button id='add-group' ng-show="groupCtrl.showCreateGroupButton" ng-click="show = true; groupCtrl.hideGroupButton(); groupCtrl.getAllUsers();">Add new group</button>
+
+  <section id="group-creation" ng-show="show">
+    <input class="form-control" id='add-group-name' ng-model="groupCtrl.groupName" placeholder='Set group name' type='text' required/>
+
+    <button id='create-group' ng-show="groupCtrl.groupName && groupCtrl.groupUsers.length > 0" ng-click="groupCtrl.createGroup();">Create Group</button>
+    <div ng-show="groupCtrl.groupUsers.length > 0">Members:</div>
+    <span class='users-in-group' ng-repeat="user in groupCtrl.groupUsers">{{user.username}}{{$last ? '' : ', '}} </span>
+    <br />
+    Click to add users:
+    <input class="form-control" id='searchbar' ng-model='query' placeholder='Filter by user' type='text'/>
+
+    <section id='users-list'>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="user in groupCtrl.allUsers | filter: query" >
+          <a href="" ng-click="groupCtrl.addUser(user);" class='users list-group-item'>
+            {{user.username}}
+          </a>
+        </li>
+      </ul>
+    </section>
+  </section>
+</section>

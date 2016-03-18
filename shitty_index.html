@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" ng-app="PaymentApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Payment App</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller/userController.js"></script>
+    <script src="js/controller/paymentController.js"></script>
+    <script src="js/controller/groupController.js"></script>
+    <script src="js/userDataService.js"></script>
+    <script src="js/groupDataFactory.js"></script>
+    <script src="js/currentPayerDataFactory.js"></script>
+
+  </head>
+
+  <body ng-controller="UserController as userCtrl" >
+    <section id='access-options' ng-hide='userCtrl.isLoggedIn()'>
+
+      <section id='choose-action' ng-show="userCtrl.noOptionChosen()">
+        <button id='choose-signup' ng-click="userCtrl.chooseSignUp = true;">Sign up</button>
+        <button id='choose-login' ng-click="userCtrl.chooseLogIn = true;">Log in</button>
+      </section>
+
+      <section id='user-registration' ng-show="userCtrl.chooseSignUp">
+        <form>
+          username:<br>
+          <input type="text" ng-model="userCtrl.userName" required><br>
+          email:<br>
+          <input type="email" ng-model="userCtrl.email" required><br>
+          password:<br>
+          <input type="password" ng-model="userCtrl.password" required>
+          <br>
+          password confirmation:<br>
+          <input type="password" ng-model="userCtrl.passwordConfirmation" required>
+          <br>
+          <input id="signUp" type="submit" value="Submit" ng-click="userCtrl.signUp()">
+        </form>
+      </section>
+
+      <section id='user-login' ng-show="userCtrl.chooseLogIn">
+        <form>
+          email:<br>
+          <input type="email" ng-model="userCtrl.email" required><br>
+          password:<br>
+          <input type="password" ng-model="userCtrl.password" required>
+          <input id="logIn" type="submit" value="Submit" ng-click="userCtrl.signUp()">
+        </form>
+      </section>
+
+    </section>
+
+    <section id="display-if-logged-in" ng-controller='GroupController as groupCtrl' ng-show="userCtrl.isLoggedIn()">
+      <h2> Welcome, {{userCtrl.userName}}</h2>
+      <section id='creating-group' ng-hide="groupCtrl.isGroupCreated()">
+
+        <button id='add-group' ng-show="groupCtrl.showCreateGroupButton" ng-click="show = true; groupCtrl.hideGroupButton();">Add new group</button>
+
+        <section id="group-creation" ng-show="show">
+          <input id='add-group-name' ng-model="groupCtrl.groupName" placeholder='Set group name' type='text' required/>
+
+          <input id='searchbar' ng-model='query' placeholder='Search for a user' type='text'/>
+
+          <section id='users-list'>
+            <ul>
+              <li ng-repeat="user in groupCtrl.allUsers | filter: query" >
+                <a href="" ng-click="groupCtrl.addUser(user);" class='users'>
+                  {{user.name}}
+                </a>
+              </li>
+            </ul>
+            Users in group:
+            <span class='users-in-group' ng-repeat="user in groupCtrl.groupUsers">{{user.name}}{{$last ? '' : ', '}} </span>
+          </section>
+          <button id='create-group' ng-click="groupCtrl.createGroup()">Create Group</button>
+        </section>
+      </section>
+
+
+
+
+      <section id="payments" ng-show="groupCtrl.isGroupCreated()" ng-controller="PaymentController as paymentCtlr">
+        <h1 id='group-title'>{{groupCtrl.groupName}}</h1>
+        Users in group:<br />
+        <span class='users-in-group' ng-repeat="user in groupCtrl.groupUsers">{{user.name}}{{$last ? '' : ', '}} </span><br />
+        The current payer is...<br /><br />
+        <h2 id='current-payer'> {{paymentCtrl.currentPayer.name}} </h2><br />
+        <input type='text' ng-model="paymentCtrl.paymentAmount"/>
+        <button id='make-payment' ng-click="paymentCtrl.pay(userCtrl.groupId, userCtrl.userId, paymentCtrl.paymentAmount)">PAY</button>
+      </section>
+
+
+
+
+    </section>
+  </body>
+  </html>

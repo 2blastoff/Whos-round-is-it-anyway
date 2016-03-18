@@ -1,0 +1,15 @@
+<section id="payments" ng-show="groupCtrl.isGroupCreated()" ng-controller="PaymentController as paymentCtrl">
+  <h2 id='group-title'>{{groupCtrl.groupName}}</h2>
+  <span class='users-in-group' ng-repeat="user in groupCtrl.groupUsers">{{user.username}}{{$last ? '' : ', '}} </span><br /><br />
+
+  <div id='button-container'>
+    <button id='update-payer' ng-click="paymentCtrl.updateCurrentPayer(); paymentCtrl.setShowPayer();">So... whose round is it anyway?</button>
+  </div>
+
+  <section id='who-is-paying' ng-show="paymentCtrl.showPayer()">
+
+    <div id='current-payer'> {{paymentCtrl.getPayerName();}} </div><br />
+    <input class="form-control" type='number' placeholder="Amount" ng-model="paymentCtrl.paymentAmount"/>
+    <button id='make-payment' ng-show="paymentCtrl.paymentAmount" ng-click="paymentCtrl.pay(paymentCtrl.paymentAmount)">PAY</button>
+  </section>
+</section>
